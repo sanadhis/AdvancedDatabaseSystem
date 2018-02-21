@@ -4,5 +4,5 @@ WHERE
     S.snum = E.snum AND 
     E.cname = C.cname AND 
     C.fid = F.fid AND 
-    S.year == "JR"  AND 
-    F.fname = "I. Teach"
+    S.year = "JR"  AND 
+    F.fname LIKE "I. Teach"
