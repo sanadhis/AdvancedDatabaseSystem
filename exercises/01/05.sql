@@ -1,6 +1,8 @@
-select F.fname
-from Faculty F, Class C
-where
-    F.fid = C.fid 
-    AND
-    C.room IS NOT NULL
+SELECT DISTINCT(F.fname)
+FROM Faculty F
+WHERE NOT EXISTS
+(
+    SELECT F2.fname
+    FROM Faculty F2, Class C1
+    WHERE F2.fid <> C1.fid
+)

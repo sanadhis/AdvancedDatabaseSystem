@@ -1,10 +1,13 @@
-select F.fname, count(C.cname)
-from Faculty F, Class C
-where
-    C.room = 'R128' and
-    F.fid = (
-        SELECT F2.fid from Faculty F2, Class C2
-        where F2.fid = C2.fid
-        group by C2.room
-        having count(distinct C2.room) = 1
+SELECT F.fname, COUNT(C.cname)
+FROM Faculty F, Class C
+WHERE
+    C.room = 'R128' AND
+    F.fid IN 
+    (
+        SELECT F2.fid 
+        FROM Faculty F2, Class C2
+        WHERE F2.fid = C2.fid
+        GROUP BY F2.fid, F2.fname
+        HAVING COUNT(distinct C2.room) = 1
     )
+GROUP BY F.fid, F.fname

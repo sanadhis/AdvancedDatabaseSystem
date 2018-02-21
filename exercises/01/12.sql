@@ -1,8 +1,12 @@
-Select C.age, C.year, max(C.CountAge)
+SELECT D.age, D.year
 FROM
 (
-    select S.age, count(S.age) as countAge, S.year
-    from Student S
-    GROUP BY S.age, S.year
-) C
-GROUP BY C.year
+    SELECT C.age, C.year, max(C.CountAge)
+    FROM
+    (
+        SELECT S.age, S.year, count(*) as CountAge
+        FROM Student S
+        GROUP BY S.age, S.year
+    ) C
+) D
+    
